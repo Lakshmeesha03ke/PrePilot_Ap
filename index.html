@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101828" />
+  <meta name="description" content="PrePilot helps students assess placement readiness and prepare smarter." />
+  <title>PrePilot — Placement Readiness</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icons/icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="PrePilot home">
+        <span class="brand-mark">P</span><span>PrePilot</span>
+      </a>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard"><span>◫</span> Overview</button>
+        <button class="nav-item" data-view="assessment"><span>◎</span> Skill assessment</button>
+        <button class="nav-item" data-view="roadmap"><span>↗</span> My roadmap</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note"><span class="spark">✦</span><strong>Small steps.<br/>Big outcomes.</strong><p>Build placement confidence one skill at a time.</p></div>
+        <div class="profile-mini"><div class="avatar">S</div><div><strong>Student workspace</strong><small>Personal dashboard</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">P</span><strong>PrePilot</strong></div>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="crumb">Overview</strong></div>
+        <button class="icon-button" id="resetBtn" title="Reset demo progress" aria-label="Reset demo progress">↻</button>
+      </header>
+
+      <section class="view active" id="dashboardView">
+        <div class="welcome-row">
+          <div><p class="eyebrow">YOUR PLACEMENT JOURNEY</p><h1>Make your next move <span>count.</span></h1><p class="subhead">A clear picture of where you stand—and what to work on next.</p></div>
+          <div class="date-pill"><span class="live-dot"></span> Your progress, at a glance</div>
+        </div>
+
+        <div class="hero-grid">
+          <article class="readiness-card">
+            <div class="card-top"><div><p class="card-kicker">PLACEMENT READINESS</p><h2>Your readiness score</h2></div><span class="pill pill-light">DEMO PROFILE</span></div>
+            <div class="score-layout">
+              <div class="score-ring" id="scoreRing"><div class="score-inner"><strong id="readinessScore">58</strong><span>out of 100</span></div></div>
+              <div class="score-copy"><h3 id="scoreTitle">You're building momentum.</h3><p id="scoreMessage">Strengthen your fundamentals and keep a steady practice rhythm to move forward.</p><div class="score-meta"><span class="tiny-check">✓</span> Score updates after assessments</div></div>
+            </div>
+            <div class="score-footer"><span><i class="dot dot-a"></i> Skills assessed</span><strong id="assessedCount">3 of 6</strong><span class="progress-track"><i id="assessedProgress" style="width:50%"></i></span></div>
+          </article>
+
+          <article class="focus-card">
+            <div class="focus-icon">✦</div><p class="card-kicker">YOUR NEXT BEST STEP</p><h2 id="focusTitle">Practice arrays & strings</h2><p id="focusDescription">Build confidence in coding fundamentals with a focused 20-minute session.</p>
+            <div class="focus-bottom"><span class="time-label">◷ &nbsp;20 min</span><button class="button button-dark" id="startFocus">Start practice <span>→</span></button></div>
+          </article>
+        </div>
+
+        <div class="section-heading"><div><p class="eyebrow">YOUR PROFILE</p><h2>Skill snapshot</h2></div><button class="text-button" data-goto="assessment">Update assessment <span>→</span></button></div>
+        <div class="skill-grid" id="skillGrid"></div>
+
+        <div class="lower-grid">
+          <article class="panel recommendation-panel"><div class="panel-heading"><div><p class="eyebrow">PERSONALIZED FOR YOU</p><h2>Recommended next</h2></div><span class="recommend-icon">✧</span></div><div id="recommendations" class="recommendations"></div></article>
+          <article class="panel weekly-panel"><div class="panel-heading"><div><p class="eyebrow">CONSISTENCY WINS</p><h2>Your activity</h2></div><span class="week-badge">THIS WEEK</span></div><div class="week-bars" id="weekBars"></div><div class="activity-foot"><span class="activity-dot"></span><span id="activityText">Start today and build your streak.</span></div></article>
+        </div>
+        <p class="disclaimer">PrePilot prototype · Your demo progress is saved in this browser on this device.</p>
+      </section>
+
+      <section class="view" id="assessmentView">
+        <div class="page-heading"><p class="eyebrow">KNOW YOUR STARTING POINT</p><h1>Skill assessment</h1><p class="subhead">Rate your current confidence in each area. Be honest—this is your starting line, not a final judgement.</p></div>
+        <div class="panel assessment-panel"><div class="assessment-intro"><span class="assessment-badge">6 SKILL AREAS</span><h2>How ready do you feel?</h2><p>Choose a score from 0 to 100 for each skill, then save your profile.</p></div><form id="assessmentForm"><div id="assessmentFields" class="assessment-fields"></div><div class="form-footer"><span id="formMessage">Your current profile is prefilled with demo values.</span><button class="button button-primary" type="submit">Save my profile <span>→</span></button></div></form></div>
+      </section>
+
+      <section class="view" id="roadmapView">
+        <div class="page-heading"><p class="eyebrow">TURN INSIGHT INTO ACTION</p><h1>Your preparation roadmap</h1><p class="subhead">A simple, adaptable plan based on the skills you want to strengthen.</p></div>
+        <div class="roadmap-summary"><div><span class="summary-icon">↗</span><div><p class="eyebrow">YOUR CURRENT PRIORITY</p><h2 id="roadmapPriority">Coding & DSA</h2><p id="roadmapReason">The biggest improvement opportunity in your profile.</p></div></div><span class="pill">UPDATED FROM YOUR PROFILE</span></div>
+        <div id="roadmapList" class="roadmap-list"></div>
+        <div class="panel roadmap-tip"><span class="tip-icon">✦</span><div><strong>Make it manageable</strong><p>Choose one small task per day. After practice, update your skill assessment to refresh your recommendations.</p></div></div>
+      </section>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <button class="nav-item active" data-view="dashboard"><span>◫</span><small>Overview</small></button>
+    <button class="nav-item" data-view="assessment"><span>◎</span><small>Assess</small></button>
+    <button class="nav-item" data-view="roadmap"><span>↗</span><small>Roadmap</small></button>
+  </nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && location.protocol !== "file:") {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(console.warn));
+    }
+  </script>
+</body>
+</html>
